@@ -1,6 +1,10 @@
 BrowserID
 =========
 
+BrowserID is a new way for users to log into web sites using their email address. It aims to provide a secure way of proving your identity to servers across the internet, 
+without having to create separate usernames and passwords each time. Instead of a new username, it uses your email address as you identity which allows it to be 
+descentralized since anyone can send you an email verification message.
+
 ![Screenshot](http://farm8.staticflickr.com/7065/6844698494_93723f56bc_z.jpg)
 
 ![Screenshot](https://developer.mozilla.org/@api/deki/files/6040/=browserid-remote-verify.png)
