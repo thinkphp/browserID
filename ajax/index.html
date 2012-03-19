@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+   <title>BrowserID with Ajax</title>
+   <script src="https://raw.github.com/gist/504207/cff5f675d3dfd98f8ad42118944a6367ac750a23/gistfile1.js"></script>
+   <script src="https://browserid.org/include.js"></script>
+   <style type="text/css">
+    h1,h2,h3,body { font-family:'gill sans','dejavu sans',verdana,sans-serif; }
+    h1 { font-family:menlo,'dejavu sans mono',monospace; }
+    h1 {
+      font-weight:bold;
+      font-size:43px;
+      letter-spacing: -1px;
+      color:#000;
+      margin-bottom:0;
+      position:relative;
+    }
+   button{border:none;background:transparent;margin:0 2em;}
+   </style>
+</head>
+<body>
+<h1><b>BrowserID</b> is an <b>easier</b> way to sign in</h1>
+<button id="myButt"><img src="https://browserid.org/i/sign_in_green.png" alt="sign in with browser ID"></button>
+<div id="result"></div>
+<script type="text/javascript">
+
+var $ = function(id){return document.getElementById(id);},
+    butt = $("myButt"),
+    status = $("result"),
+    request;
+
+var addEvent = function(elem,evType,fnHandler,useCapture){
+
+             if(elem.addEventListener) { 
+                return elem.addEventListener(evType,fnHandler,useCapture); 
+             } else if(elem.attachEvent){
+                return elem.attachEvent('on'+evType,fnHandler);
+             } else {
+                elem['on'+evType] = fnHandler;
+             }
+}
+
+addEvent(butt,'click',function(){
+
+navigator.id.getVerifiedEmail(function(assertion) {
+
+    if(assertion) {
+
+           verify(assertion);
+
+    } else {
+
+           alert('I still don\'t know you...');
+    }
+});
+
+},false)
+
+function verify(assertion) {
+
+         var params = 'assertion=' + assertion,
+             url = 'login.php'; 
+
+             asyncRequest.REQUEST("POST",url,function(data){
+                  var response = JSON.parse(data),
+                      p = document.createElement('p');
+                      p.innerHTML = 'Welcome, ' + response.email;
+
+                      butt.parentNode.replaceChild(p,butt);
+                      $('result').innerHTML = 'WoW, I know you!';
+
+             },params);
+}
+
+</script>
+</body>
+</html>
+
