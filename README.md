@@ -10,9 +10,11 @@ How to Use
 
 Include the BrowserID include.js library in your site by adding the following script tag to your pages:
 
+       #head
        <script src="https://browserid.org/include.js" type="text/javascript"></script>
 
 
+       #JS
        addEvent(butt,'click',function(){
 
            navigator.id.getVerifiedEmail(function(assertion) {
@@ -48,4 +50,18 @@ Include the BrowserID include.js library in your site by adding the following sc
                       $('result').innerHTML = 'WoW, I know you!';
 
              }, params);
+       }
+
+       #PHP
+       require_once('login.class.php');
+ 
+       $browserID = new BrowserID($_SERVER['HTTP_HOST'], $_POST['assertion']);
+
+       if($browserID->verify_assertion()) {
+ 
+             echo json_encode(array('status'=>'okay', 'email'=>$browserID->getEmail()));
+
+       } else {
+
+             echo json_encode(array('status'=>'failure'));
        }
