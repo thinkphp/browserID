@@ -78,3 +78,12 @@ When DOM is ready:
 
              echo json_encode(array('status'=>'failure'));
        }
+
+References:
+
+- https://browserid.org/
+- https://developer.mozilla.org/en/BrowserID
+- https://browserid.org/developers
+- http://identity.mozilla.com/post/7616727542/introducing-browserid-a-better-way-to-sign-in
+- http://identity.mozilla.com/post/17207734786/id-provider-support-now-live-on-browserid
+- https://github.com/mozilla/browserid/wiki
